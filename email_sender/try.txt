@@ -1,0 +1,8 @@
+Buenas,
+
+
+este es un correo de prueba desde Python.
+
+Un saludo,
+
+Emilio
