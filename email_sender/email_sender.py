@@ -1,30 +1,28 @@
 import win32com.client as win32
 
-if __name__ == '__main__':
 
-    # receivers_list = ['marialaura.marinelli@contractor.qiagen.com', 'georgina.mitjansdomenech@qiagen.com']
+class Email:
 
-    outlook = win32.Dispatch('outlook.application')
-    mail = outlook.CreateItem(0)
-    mail.To = 'emilio.pardo@qiagen.com'
-    mail.Subject = 'mensaje de prueba'
-    # mail.Body = """
-    # Jodeos: Ahora puedo hacer spam a todo el mundo.
-    #
-    # os lo envío a las dos al mismo tiempo.
-    #
-    # Firmado:
-    #
-    # El nuevo spammer de la empresa
-    #
-    # """
-    mail.HTMLBody = """<p>Mensaje de prueba para testear que puedo enviar la información"""
+    def __init__(self):
 
-    # # To attach a file to the email (optional):
-    attachment = r'C:\Users\epardo\PycharmProjects\pythonProject\email_sender\table_report'
-    mail.Attachments.Add(attachment)
+        receivers_list = ['emilio.pardo@qiagen.com', 'ignacio.micolau@qiagen.com']
 
-    mail.Send()
+        outlook = win32.Dispatch('outlook.application')
+        mail = outlook.CreateItem(0)
+        mail.To = receivers_list[0]
+        mail.Subject = 'Report Cartuchos'
+
+        mail.HTMLBody = """
+        <p>Este correo se genera automáticamente.</p>
+        <p>Los cartuchos fabricados por cada turno han sido:</p>
+        <img src="TestFigure.png">
+        """
+
+        # # To attach a file to the email (optional):
+        attachment = r'C:\Users\epardo\PycharmProjects\pythonProject\email_sender\TestFigure.png'
+        mail.Attachments.Add(attachment)
+
+        mail.Send()
 
 
 

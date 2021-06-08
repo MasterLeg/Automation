@@ -162,7 +162,7 @@ if __name__ == '__main__':
 
             # Get the match in the PO Sheet
             try:
-                matches = [df['Supplier Lot'].loc[(df['Lot/Serial'] == lot)].values[0] for lot in list_lots]
+                matches = [df['Supplier Lot'].loc[(df['Lot/Serial'] == lot)].matrix_days_quantities[0] for lot in list_lots]
             except IndexError:
                 # When there is no match with the Sheet Data Source, the returned value will be "#N/D"
                 print('main.py, Line 151: Not Found item on Data Source')
