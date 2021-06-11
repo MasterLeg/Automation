@@ -3,6 +3,7 @@ from mysql.connector import Error
 from datetime import datetime, timedelta
 import time
 import numpy as np
+from email_sender.datesconverter import DatesConverter
 
 
 class DataBase:
@@ -87,14 +88,28 @@ class DataBase:
         :return: Manufactured cartridges quantity between the two dates
         """
 
-        # Note: to improve precision add: + self.timedelta to get the exact time to start_hour and end_hour
+        # Only for the balances weight data base, convert to a Julian date format
+        if self.kind == 'Balances':
+            converter = DatesConverter()
+            start_hour = converter.date_to_float(start_hour)
+            end_hour = converter.date_to_float(end_hour)
 
-        query = f"""
-                 SELECT COUNT(DISTINCT SN)
-                 FROM {self.table}
-                 WHERE {self.time_field} BETWEEN '{start_hour}'
-                 AND '{end_hour}'
-                 """
+            query = f"""
+                     SELECT COUNT(DISTINCT SN)
+                     FROM {self.table}
+                     WHERE Station = 2
+                     AND {self.time_field} BETWEEN {start_hour}
+                     AND {end_hour}
+                     """
+
+        # Note: to improve precision add: + self.timedelta to get the exact time to start_hour and end_hour
+        else:
+            query = f"""
+                     SELECT COUNT(DISTINCT SN)
+                     FROM {self.table}
+                     WHERE {self.time_field} BETWEEN '{start_hour}'
+                     AND '{end_hour}'
+                     """
         one_hour_cartridges = self.execute_query_get_one(query)
 
         return one_hour_cartridges
@@ -142,4 +157,5 @@ class DataBase:
         else:
             total_split_quantities = [np.nan] * 3 + total_split_quantities
 
+        print(total_split_quantities)
         return total_split_quantities

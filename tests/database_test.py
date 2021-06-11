@@ -1,6 +1,7 @@
 import unittest
 from email_sender.LogicMaster import LogicMaster
-
+from email_sender.table import Table
+import numpy as np
 
 class MyTestCase(unittest.TestCase):
 
@@ -8,6 +9,8 @@ class MyTestCase(unittest.TestCase):
 
         LogicMaster()
         self.assertEqual(True, True)
+        # matrix = np.random.randint(800, size=(7, 10))
+        # Table(matrix)
 
 
 if __name__ == '__main__':

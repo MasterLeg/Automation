@@ -42,7 +42,27 @@ class DataGate:
                                          table='pouch',
                                          time_field='Date')
 
+        self.db_SSL1_balances = DataBase(kind='Balances',
+                                         line='SSL1',
+                                         host='10.156.9.78',
+                                         database='resultdata',
+                                         user='qiastat_ro',
+                                         password='READStat2020',
+                                         table='results',
+                                         time_field='Time2')
+
+        self.db_SSL3_balances = DataBase(kind='Balances',
+                                         line='SSL3',
+                                         host='10.156.12.26',
+                                         database='resultdata',
+                                         user='qiastat_ro',
+                                         password='READStat2020',
+                                         table='results',
+                                         time_field='Time2')
+
         self.databases = {'Started': {'SSL1': self.db_SSL1_started,
                                       'SSL3': self.db_SSL3_started},
                           'Finished': {'SSL1': self.db_SSL1_finished,
-                                       'SSL3': self.db_SSL3_finished}}
+                                       'SSL3': self.db_SSL3_finished},
+                          'Balances': {'SSl1': self.db_SSL1_balances,
+                                       'SSL3': self.db_SSL3_balances}}

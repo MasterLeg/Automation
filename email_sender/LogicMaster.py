@@ -4,7 +4,7 @@ from email_sender.days import Days
 from email_sender.table import Table
 from email_sender.email_sender import Email
 import numpy as np
-
+from datetime import timedelta
 
 
 class LogicMaster:
@@ -18,8 +18,7 @@ class LogicMaster:
         # Create the visual table
         Table(ordered_matrix_productions)
         # Send the table to the user mail
-        Email()
-
+        # Email()
 
     def get_dates_list(self):
         # Get current week
@@ -39,9 +38,18 @@ class LogicMaster:
         # For each day in the list, the manufactured cartridges split by shift
         volume_production_shifts = np.array([[db.get_split_shifts_by_day(day)
                                               for day in current_week_dates]
-                                             for db in dg.databases['Finished'].values()])
+                                             for db in dg.databases['Balances'].values()])
 
         # The data are returned in a volume, then join each layer one right after the other
+        # print('Matrix A:\n', volume_production_shifts[0])
+        # print('Matrix B:\n', np.array([0] * 7).reshape(7, 1))
+        # print(np.hstack(np.array([0] * 7).reshape(1, 7), volume_production_shifts[0]))
+        print(volume_production_shifts[0])
+        print(volume_production_shifts[1])
+
         ordered_matrixes_productions = np.hstack((volume_production_shifts[0], volume_production_shifts[1]))
         return ordered_matrixes_productions
 
+
+if __name__ == '__main__':
+    LogicMaster()

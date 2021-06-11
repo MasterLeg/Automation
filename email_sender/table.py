@@ -15,14 +15,15 @@ class Table:
         matrix_days_quantities = np.concatenate((week_days_array, quantities_by_shift), 1).transpose()
 
         # Colors matrix: [week_days, quantities_from_database]
-        colors_week_days = np.array(['white'] * 7).reshape(7, 1)
+        colors_week_days = np.array(['ghostwhite'] * 7).reshape(7, 1)
         colors_quantities = self.convert_to_colors(quantities_by_shift)
         print(colors_quantities)
         color_matrix = np.concatenate((colors_week_days, colors_quantities), 1).transpose()
         print(color_matrix)
 
         # Headers_colors
-        headers_colors = np.array([['white'] * 11, ['white'] + ['#00ffff'] * 5 + ['#ffff00'] * 5]).transpose()
+        headers_colors = np.array([['white'] + ['lightcyan'] * 5 + ['lightskyblue'] * 5,
+                                  ['white'] + ['lightcyan'] * 5 + ['lightskyblue'] * 5]).transpose()
 
         # Table
         fig = go.Figure(data=[go.Table(
@@ -38,66 +39,52 @@ class Table:
                         ['<b>SSL3</b>', '<b>Tarde</b>'],
                         ['', '<b>Noche finde</b>'],
                         ['', '<b>Mañana finde</b>']],
-                line_color='white',
+                line_color=headers_colors,
                 fill_color=headers_colors,
                 align='center',
-                font=dict(color='black', size=12)
+                font=dict(color='black', size=18)
             ),
             cells=dict(
                 values=matrix_days_quantities,
                 line_color='black',
                 fill_color=color_matrix,
                 align='center',
-                font=dict(color='black', size=11)
+                font=dict(color='black', size=16),
+                height=45
             ))
         ])
 
         # Save the table
         path = r'C:\Users\epardo\PycharmProjects\pythonProject\email_sender\TestFigure.png'
-        fig.write_image(path, height=450, width=1000)
+        fig.write_image(path, height=680, width=1500, scale=0.8)
 
     def convert_to_colors(self, matrix):
 
+        # Objectives dictionary
         objectives_dict = {
-            'SSL1': dict(week=(719, 762), weekend=(1097, 1162)),
-            'SSL3': dict(week=(640, 679), weekend=(977, 1035))
+            'SSL1': dict(week=(dict(max=648, min=611)), weekend=(dict(max=1162, min=932))),
+            'SSL3': dict(week=(dict(max=577, min=544)), weekend=(dict(max=1035, min=830)))
         }
 
+        # Preallocate the matrix
         colors_matrix = np.chararray(matrix.shape, itemsize=6)
 
+        # Fulfill the matrix with the values based on the value
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
-                if i <= 5 and j <= 5:
-                    line = 'SSL1'
-                    day = 'week'
-                elif i > 5 and j <= 5:
-                    line = 'SSL1'
-                    day = 'weekend'
-                elif i <= 5 and j > 5:
-                    line = 'SSL3'
-                    day = 'week'
-                else:
-                    line = 'SSL3'
-                    day = 'weekend'
+                day = 'week' if i < 5 else 'weekend'
+                line = 'SSL1' if j < 5 else 'SSL3'
 
                 val = matrix[i][j]
+                min = objectives_dict[line][day]['min']
+                max = objectives_dict[line][day]['max']
 
-                if np.isnan(val):
-                    color = 'grey'
-                elif val == 0:
-                    color = 'white'
-                elif val > objectives_dict[line][day][1]:
-                    color = 'green'
-                elif objectives_dict[line][day][0] <= val < objectives_dict[line][day][1]:
-                    color = 'orange'
-                else:
-                    color = 'red'
+                color = 'black' if np.isnan(val) else 'white' if val == 0 else \
+                        'red' if val < min else 'green' if val > max else 'orange'
 
-                position = j + i*len(matrix[0])
-                print(position, val, color)
+                position = j + i * len(matrix[0])
+                print(position, i, j, val, line, day, min, max, color)
 
                 np.put(colors_matrix, position, color)
 
         return colors_matrix
-
-
