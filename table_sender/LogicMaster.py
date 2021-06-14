@@ -25,10 +25,10 @@ class LogicMaster:
         week_number = int(today.strftime('%V'))
         year = datetime.now().year
 
-        # Get datetime monday
-        monday = datetime.fromisocalendar(year, week_number, 1)
+        # Get datetime saturday from previous week
+        saturday = datetime.fromisocalendar(year, week_number - 1, 6)
         # Create all current week datetime list datetime
-        return Days(monday, 7).get_list()
+        return Days(saturday, 7).get_list()
 
     def get_matrix_values(self, current_week_dates):
         dg = DataGate()

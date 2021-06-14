@@ -9,8 +9,8 @@ class Table:
         # as plotly methods plot columns, not rows
 
         # Values matrix: [week_days, quantiites_from_databases]
-        week_days_array = np.array(['Lunes', 'Martes', 'Miércoles', 'Jueves',
-                                    'Viernes', 'Sábado', 'Domingo']).reshape(7, 1)
+        week_days_array = np.array(['Sábado', 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves',
+                                    'Viernes']).reshape(7, 1)
         quantities_by_shift = numpy_ordered_matrixes
         matrix_days_quantities = np.concatenate((week_days_array, quantities_by_shift), 1).transpose()
 
@@ -72,7 +72,7 @@ class Table:
         # Fulfill the matrix with the values based on the value
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
-                day = 'week' if i < 5 else 'weekend'
+                day = 'week' if i > 1 else 'weekend'
                 line = 'SSL1' if j < 5 else 'SSL3'
 
                 val = matrix[i][j]
