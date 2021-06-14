@@ -23,7 +23,7 @@ class Email:
     #     """
     #
     #     # To attach the image to be able to plot it:
-    #     attachment = r'C:\Users\epardo\PycharmProjects\pythonProject\email_sender\TestFigure.png'
+    #     attachment = r'C:\Users\epardo\PycharmProjects\pythonProject\table_sender\TestFigure.png'
     #     mail.Attachments.Add(attachment)
     #
     #     mail.Send()

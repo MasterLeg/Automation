@@ -3,7 +3,7 @@ from mysql.connector import Error
 from datetime import datetime, timedelta
 import time
 import numpy as np
-from email_sender.datesconverter import DatesConverter
+from table_sender.datesconverter import DatesConverter
 
 
 class DataBase:

@@ -1,6 +1,6 @@
 import unittest
-from email_sender.LogicMaster import LogicMaster
-from email_sender.table import Table
+from table_sender.LogicMaster import LogicMaster
+from table_sender.table import Table
 import numpy as np
 
 class MyTestCase(unittest.TestCase):

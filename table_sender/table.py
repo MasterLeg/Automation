@@ -55,7 +55,7 @@ class Table:
         ])
 
         # Save the table
-        path = r'C:\Users\epardo\PycharmProjects\pythonProject\email_sender\TestFigure.png'
+        path = r'J:\98_Scaling up plan\14-Proyectos 2021\13_Lean Box\20_Objetivo y Producciones\ObjectivesTable.png'
         fig.write_image(path, height=680, width=1500, scale=0.8)
 
     def convert_to_colors(self, matrix):

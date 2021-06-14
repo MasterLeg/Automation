@@ -1,4 +1,4 @@
-from email_sender.databases.database import DataBase
+from table_sender.databases.database import DataBase
 
 
 class DataGate:

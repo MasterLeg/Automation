@@ -1,10 +1,8 @@
-from email_sender.databases.datagate import DataGate
+from table_sender.databases.datagate import DataGate
 from datetime import datetime
-from email_sender.days import Days
-from email_sender.table import Table
-from email_sender.email_sender import Email
+from table_sender.days import Days
+from table_sender.table import Table
 import numpy as np
-from datetime import timedelta
 
 
 class LogicMaster:
@@ -19,6 +17,7 @@ class LogicMaster:
         Table(ordered_matrix_productions)
         # Send the table to the user mail
         # Email()
+        self.open_image_explorer()
 
     def get_dates_list(self):
         # Get current week
@@ -50,6 +49,7 @@ class LogicMaster:
         ordered_matrixes_productions = np.hstack((volume_production_shifts[0], volume_production_shifts[1]))
         return ordered_matrixes_productions
 
-
-if __name__ == '__main__':
-    LogicMaster()
+    def open_image_explorer(self):
+        import subprocess
+        subprocess.Popen(['explorer',
+                          r'J:\98_Scaling up plan\14-Proyectos 2021\13_Lean Box\20_Objetivo y Producciones\ObjectivesTable.png'])

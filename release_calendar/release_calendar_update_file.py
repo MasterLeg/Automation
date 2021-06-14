@@ -16,10 +16,10 @@ def open_desktop():
 def automated_cartridge_release_calendar_saving():
     # open_desktop()
     # Open Teams
-    # os.startfile('C:\\Users\\epardo\\AppData\\Local\\Microsoft\\Teams\\current\\Teams.exe')
+    os.startfile('C:\\Users\\epardo\\AppData\\Local\\Microsoft\\Teams\\current\\Teams.exe')
 
     # Select Teams
-    auto.click(859, 1061)
+    # auto.click(859, 1061)
     auto.PAUSE = 1.5
 
     # Select "Equipos"
