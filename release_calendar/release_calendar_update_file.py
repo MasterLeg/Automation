@@ -24,6 +24,8 @@ def automated_cartridge_release_calendar_saving():
 
     # Select "Equipos"
     auto.click(33, 187)
+    auto.PAUSE = 0.2
+    auto.click(33, 187)
     auto.PAUSE = 0.7
 
     # Select "Manufacturing BCN"
