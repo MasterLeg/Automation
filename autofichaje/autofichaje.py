@@ -31,13 +31,13 @@ if __name__ == '__main__':
     auto.write(user)
 
     # Click on password
-    auto.click(2327, 487)
+    auto.click(2307, 743)
 
     # Introduce password
     auto.write(password)
 
     # Click on send
-    auto.click(2378, 626)
+    auto.click(2383, 891)
 
 
 
