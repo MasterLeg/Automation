@@ -87,8 +87,8 @@ if __name__ == '__main__':
         list_lots = sel_cell.split_lots
         print('Cell values split: ', list_lots)
 
-        # Converting each entry into strings
-        list_lots = [str(entry) for entry in list_lots]
+        # Converting each entry into strings (and removing spaces)
+        list_lots = [str(entry).replace(' ', '') for entry in list_lots]
 
         # Get the match in the PO Sheet
         matches = [] * len(list_lots)
